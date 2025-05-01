@@ -754,7 +754,7 @@ class LeaveType():
         else:
             return None
              
-class UpdateUserWorkTypeBalanceHistory():
+class WorkTypeService():
     web_url = "https://app.clicktime.com/App/"
     svc_path = "Details/WorkType/WorkTypeService.asmx/"
 
@@ -800,6 +800,32 @@ class UpdateUserWorkTypeBalanceHistory():
 
     def set(self, targetUserId, timeOffType, value, date, note=""):
         return self.adjust(5, targetUserId, timeOffType, value, date, note)
+
+    def get(self, targetUserId, timeOffType, showDeleted=False):
+        headers = {
+            'Content-Type': 'application/json',  # Example if you're sending JSON data
+            'Accept': '*/*'
+        }
+
+        payload = {
+            "targetUserID": targetUserId,
+            "userWorkTypeBalanceID": timeOffType,
+            "showDeleted": str(showDeleted),
+        }
+
+        protected_url = UpdateUserWorkTypeBalanceHistory.web_url + \
+                        UpdateUserWorkTypeBalanceHistory.svc_path + \
+                        "GetUserWorkTypeBalanceHistoryWithPayrollTime"
+
+        response = self.web.session.post(
+            protected_url,
+            headers=headers,
+            json=payload
+        )
+
+        result = json.loads(response.text)
+
+        return result
 
 ##############################################################################
 # ClickTime
