@@ -779,7 +779,7 @@ class WorkTypeService():
             "note": note
         }
 
-        protected_url = UpdateUserWorkTypeBalanceHistory.web_url + UpdateUserWorkTypeBalanceHistory.svc_path + "UpdateUserWorkTypeBalanceHistory"
+        protected_url = WorkTypeService.web_url + WorkTypeService.svc_path + "UpdateUserWorkTypeBalanceHistory"
 
         response = self.web.session.post(
             protected_url,
@@ -813,8 +813,8 @@ class WorkTypeService():
             "showDeleted": str(showDeleted),
         }
 
-        protected_url = UpdateUserWorkTypeBalanceHistory.web_url + \
-                        UpdateUserWorkTypeBalanceHistory.svc_path + \
+        protected_url = WorkTypeService.web_url + \
+                        WorkTypeService.svc_path + \
                         "GetUserWorkTypeBalanceHistoryWithPayrollTime"
 
         response = self.web.session.post(
